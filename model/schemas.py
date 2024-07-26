@@ -55,3 +55,16 @@ class QuantityInfoResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+# category
+class CategoryAddRequest(BaseModel):
+    name: str
+
+
+# sub category
+
+
+class SubCategoryAddRequest(BaseModel):
+    dom_categorie_id: int
+    sub_categorie_id: int

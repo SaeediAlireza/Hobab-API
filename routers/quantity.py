@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from util import util
 
-router = APIRouter(tags=["quantity"], prefix="/quantitty")
+router = APIRouter(tags=["quantity"], prefix="/quantity")
 
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)

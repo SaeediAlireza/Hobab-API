@@ -48,7 +48,7 @@ class Item(Base):
     transactions = relationship("Transaction", back_populates="item")
 
     quantity = relationship("Quantity", back_populates="items")
-    categorie = relationship("Cotegorie", back_populates="items")
+    categorie = relationship("Categorie", back_populates="items")
 
 
 class SubCategorie(Base):
@@ -59,14 +59,14 @@ class SubCategorie(Base):
     sub_categorie_id = Column(Integer, ForeignKey("categories.id"))
 
     dom = relationship(
-        "Cotegorie", back_populates="dom_categorie", foreign_keys=[dom_categorie_id]
+        "Categorie", back_populates="dom_categorie", foreign_keys=[dom_categorie_id]
     )
     sub = relationship(
-        "Cotegorie", back_populates="sub_categorie", foreign_keys=[sub_categorie_id]
+        "Categorie", back_populates="sub_categorie", foreign_keys=[sub_categorie_id]
     )
 
 
-class Cotegorie(Base):
+class Categorie(Base):
     __tablename__ = "categories"
 
     id = Column(Integer, primary_key=True, index=True)
