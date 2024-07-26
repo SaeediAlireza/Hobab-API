@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 def get_router(db: Session):
 
-    router = APIRouter(tags=["usertype"], prefix="/usertype")
+    router = APIRouter(tags=["user type"], prefix="/user-type")
 
     @router.post("/add")
     def add_user_type(request: schemas.UserTypeAddRequest):
@@ -17,7 +17,7 @@ def get_router(db: Session):
         db.refresh(new_user_type)
         return new_user_type
 
-    @router.get()
+    @router.get("/{user_type_id}")
     def get_user_type_by_id(
         user_type_id,
         response: Response,
@@ -37,3 +37,5 @@ def get_router(db: Session):
         if not user_types:
             response.status_code = status.HTTP_404_NOT_FOUND
         return user_types
+
+    return router
