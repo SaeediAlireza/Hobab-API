@@ -4,16 +4,14 @@ from fastapi import Depends, status
 from sqlalchemy.orm import Session
 from model import model, schemas
 from util import util
+from sqlalchemy.orm import Session
 
 
-def get_router():
+def get_router(db: Session):
     router = APIRouter(tags=["authenticaton"])
 
     @router.post("/login", response_model=schemas.Token)
-    def login(
-        request: OAuth2PasswordRequestForm = Depends(),
-        db: Session = Depends(util.get_db),
-    ):
+    def login(request: OAuth2PasswordRequestForm = Depends()):
         user = (
             db.query(model.User)
             .filter(model.User.user_name == request.username)
