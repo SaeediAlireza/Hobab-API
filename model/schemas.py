@@ -40,3 +40,18 @@ class UserResponseInfo(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+# quantity
+
+
+class QuantityAddRequest(BaseModel):
+    name: str
+
+
+class QuantityInfoResponse(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        orm_mode = True
