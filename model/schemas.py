@@ -11,6 +11,19 @@ class TokenData(BaseModel):
     username: str | None = None
 
 
+# user type
+class UserTypeAddRequest(BaseModel):
+    name: str
+
+
+class UserTypeInfo(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        orm_mode = True
+
+
 # user
 class UserAddRequest(BaseModel):
     user_name: str
@@ -19,6 +32,11 @@ class UserAddRequest(BaseModel):
     user_type_id: int
 
 
-# user type
-class UserTypeAddRequest(BaseModel):
+class UserResponseInfo(BaseModel):
+    user_name: str
+    password: str
     name: str
+    type: UserTypeInfo
+
+    class Config:
+        orm_mode = True

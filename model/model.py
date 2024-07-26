@@ -24,74 +24,74 @@ class UserType(Base):
     type_users = relationship("User", back_populates="type")
 
 
-class Stock(Base):
-    __tablename__ = "stocks"
+# class Stock(Base):
+#     __tablename__ = "stocks"
 
-    id = Column(Integer, primary_key=True, index=True)
-    categorie_id = Column(Integer, ForeignKey("categories.id"))
+#     id = Column(Integer, primary_key=True, index=True)
+#     categorie_id = Column(Integer, ForeignKey("categories.id"))
 
-    categorie = relationship("Cotegorie", back_populates="stocks")
-
-
-class SubCategorie(Base):
-    __tablename__ = "sub_categories"
-
-    id = Column(Integer, primary_key=True, index=True)
-    dom_categorie_id = Column(Integer, ForeignKey("categories.id"))
-    sub_categorie_id = Column(Integer, ForeignKey("categories.id"))
-
-    dom = relationship(
-        "Cotegorie", back_populates="dom_categorie", foreign_keys=[dom_categorie_id]
-    )
-    sub = relationship(
-        "Cotegorie", back_populates="sub_categorie", foreign_keys=[sub_categorie_id]
-    )
+#     categorie = relationship("Cotegorie", back_populates="stocks")
 
 
-class Transaction(Base):
-    __tablename__ = "transactions"
+# class SubCategorie(Base):
+#     __tablename__ = "sub_categories"
 
-    id = Column(Integer, primary_key=True, index=True)
-    input = Column(Boolean)
-    amount = Column(Integer)
-    transaction_time = Column(DateTime)
-    items_id = Column(Integer, ForeignKey("items.id"))
+#     id = Column(Integer, primary_key=True, index=True)
+#     dom_categorie_id = Column(Integer, ForeignKey("categories.id"))
+#     sub_categorie_id = Column(Integer, ForeignKey("categories.id"))
 
-    item = relationship("Item", back_populates="transactions")
-
-
-class Item(Base):
-    __tablename__ = "items"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(999))
-    count = Column(Integer)
-    quantity_id = Column(Integer, ForeignKey("quantities.id"))
-    categorie_id = Column(Integer, ForeignKey("categories.id"))
-
-    transactions = relationship("Transaction", back_populates="item")
-
-    quantity = relationship("Quantity", back_populates="items")
-    categirie = relationship("Cotegorie", back_populates="items")
+#     dom = relationship(
+#         "Cotegorie", back_populates="dom_categorie", foreign_keys=[dom_categorie_id]
+#     )
+#     sub = relationship(
+#         "Cotegorie", back_populates="sub_categorie", foreign_keys=[sub_categorie_id]
+#     )
 
 
-class Cotegorie(Base):
-    __tablename__ = "categories"
+# class Transaction(Base):
+#     __tablename__ = "transactions"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(999))
+#     id = Column(Integer, primary_key=True, index=True)
+#     input = Column(Boolean)
+#     amount = Column(Integer)
+#     transaction_time = Column(DateTime)
+#     items_id = Column(Integer, ForeignKey("items.id"))
 
-    stocks = relationship("Stock", back_populates="categorie")
-    items = relationship("Item", back_populates="categorie")
-
-    dom_categorie = relationship("SubCategorie", back_populates="dom")
-    sub_categorie = relationship("SubCategorie", back_populates="sub")
+#     item = relationship("Item", back_populates="transactions")
 
 
-class Quantity(Base):
-    __tablename__ = "quantities"
+# class Item(Base):
+#     __tablename__ = "items"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(999))
+#     id = Column(Integer, primary_key=True, index=True)
+#     name = Column(String(999))
+#     count = Column(Integer)
+#     quantity_id = Column(Integer, ForeignKey("quantities.id"))
+#     categorie_id = Column(Integer, ForeignKey("categories.id"))
 
-    items = relationship("Item", back_populates="quantity")
+#     transactions = relationship("Transaction", back_populates="item")
+
+#     quantity = relationship("Quantity", back_populates="items")
+#     categirie = relationship("Cotegorie", back_populates="items")
+
+
+# class Cotegorie(Base):
+#     __tablename__ = "categories"
+
+#     id = Column(Integer, primary_key=True, index=True)
+#     name = Column(String(999))
+
+#     stocks = relationship("Stock", back_populates="categorie")
+#     items = relationship("Item", back_populates="categorie")
+
+#     dom_categorie = relationship("SubCategorie", back_populates="dom")
+#     sub_categorie = relationship("SubCategorie", back_populates="sub")
+
+
+# class Quantity(Base):
+#     __tablename__ = "quantities"
+
+#     id = Column(Integer, primary_key=True, index=True)
+#     name = Column(String(999))
+
+#     items = relationship("Item", back_populates="quantity")
