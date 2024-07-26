@@ -17,3 +17,8 @@ class UserAddRequest(BaseModel):
     password: str
     name: str
     user_type_id: int
+
+
+# user type
+class UserTypeAddRequest(BaseModel):
+    name: str
