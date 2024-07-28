@@ -25,3 +25,16 @@ def create_transaction(
     db.commit()
     db.refresh(new_item)
     return new_item
+
+
+@router.get("last", response_model=schemas.TransactionAddReqest)
+def get_last_transaction(
+    response: Response,
+    db: Session = Depends(util.get_db),
+):
+    last_transaction = (
+        db.query(model.Transaction).order_by(model.Transaction.id.desc()).first()
+    )
+    if not last_transaction:
+        response.status_code = status.HTTP_404_NOT_FOUND
+    return last_transaction

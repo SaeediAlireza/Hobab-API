@@ -89,3 +89,14 @@ class TransactionAddReqest(BaseModel):
     amount: int
     transaction_time: datetime
     item_id: int
+
+
+class QuantityInfoResponse(BaseModel):
+    id: int
+    input: bool
+    amount: int
+    transaction_time: datetime
+    item_id: int
+
+    class Config:
+        orm_mode = True
