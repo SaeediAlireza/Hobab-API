@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+import datetime
 
 
 # login
@@ -68,3 +69,23 @@ class CategoryAddRequest(BaseModel):
 class SubCategoryAddRequest(BaseModel):
     dom_categorie_id: int
     sub_categorie_id: int
+
+
+# item
+
+
+class ItemAddRequest(BaseModel):
+    name: str
+    count: int
+    quantity_id: int
+    category_id: int
+
+
+# transaction
+
+
+class TransactionAddReqest(BaseModel):
+    input: bool
+    amount: int
+    transaction_time: datetime
+    item_id: int
