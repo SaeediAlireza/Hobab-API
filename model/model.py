@@ -93,3 +93,81 @@ class Quantity(Base):
     name = Column(String(999))
 
     items = relationship("Item", back_populates="quantity")
+
+
+class Ages(Base):
+    __tablename__ = "ageses"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class LengthClass(Base):
+    __tablename__ = "length_classes"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class Location(Base):
+    __tablename__ = "locations"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class PoolType(Base):
+    __tablename__ = "pool_types"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class CaviarBredd(Base):
+    __tablename__ = "caviar_breeds"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class WeightClass(Base):
+    __tablename__ = "weight_classes"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class FishType(Base):
+    __tablename__ = "fish_type"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class Fishes(Base):
+    __tablename__ = "fishes"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class Pool(Base):
+    __tablename__ = "pools"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class Caviar(Base):
+    __tablename__ = "caviars"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class Task(Base):
+    __tablename__ = "tasks"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class Shift(Base):
+    __tablename__ = "Shifts"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+
+class A_________(Base):
+    __tablename__ = "A________"
+
+    id = Column(Integer, primary_key=True, index=True)
