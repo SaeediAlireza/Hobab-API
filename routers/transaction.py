@@ -27,7 +27,7 @@ def create_transaction(
     return new_item
 
 
-@router.get("last", response_model=schemas.TransactionAddReqest)
+@router.get("last", response_model=schemas.TransactionInfoResponse)
 def get_last_transaction(
     response: Response,
     db: Session = Depends(util.get_db),

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-import datetime
+from datetime import datetime
 
 
 # login
@@ -91,7 +91,7 @@ class TransactionAddReqest(BaseModel):
     item_id: int
 
 
-class QuantityInfoResponse(BaseModel):
+class TransactionInfoResponse(BaseModel):
     id: int
     input: bool
     amount: int
