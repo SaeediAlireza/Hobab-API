@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from util import util
 
 
-router = APIRouter(tags=["sub category"], prefix="/sub-category")
+router = APIRouter(tags=["transaction"], prefix="/transacion")
 
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
