@@ -16,6 +16,8 @@ class User(Base):
 
     type = relationship("UserType", back_populates="type_users")
 
+    shifts = relationship("Shift", back_populates="user")
+
 
 class UserType(Base):
 
@@ -104,6 +106,8 @@ class Ages(Base):
     start_age = Column(Integer)
     end_age = Column(Integer)
 
+    caviars = relationship("Caviar", back_populates="ages")
+
 
 class LengthClass(Base):
     __tablename__ = "length_classes"
@@ -112,12 +116,17 @@ class LengthClass(Base):
     start_lenght = Column(Integer)
     end_lenght = Column(Integer)
 
+    caviars = relationship("Caviar", back_populates="length_class")
+
 
 class Location(Base):
     __tablename__ = "locations"
 
     id = Column(Integer, primary_key=True, index=True)
     description = Column(String(999))
+
+    pools = relationship("Pool", back_populates="location")
+    tasks = relationship("Task", back_populates="location")
 
 
 class PoolType(Base):
@@ -126,12 +135,16 @@ class PoolType(Base):
     id = Column(Integer, primary_key=True, index=True)
     description = Column(String(999))
 
+    pools = relationship("Pool", back_populates="pool_type")
 
-class CaviarBredd(Base):
+
+class CaviarBreed(Base):
     __tablename__ = "caviar_breeds"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(999))
+
+    caviars = relationship("Caviar", back_populates="caviar_breed")
 
 
 class WeightClass(Base):
@@ -141,12 +154,15 @@ class WeightClass(Base):
     start_weight = Column(Integer)
     start_end = Column(Integer)
 
+    caviars = relationship("Caviar", back_populates="weight_class")
+
 
 class FishType(Base):
     __tablename__ = "fish_types"
 
     id = Column(Integer, primary_key=True, index=True)
     birth_of_fish = Column(DateTime)
+    fishes = relationship("Fish", back_populates="fish_type")
 
 
 class Fish(Base):
@@ -154,6 +170,9 @@ class Fish(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     fish_type_id = Column(Integer, ForeignKey("fish_types.id"))
+
+    fish_type = relationship("FishType", back_populates="fishes")
+    pools = relationship("Pool", back_populates="location")
 
 
 class Pool(Base):
@@ -165,6 +184,13 @@ class Pool(Base):
     Location_id = Column(Integer, ForeignKey("locations.id"))
     fish_id = Column(Integer, ForeignKey("fishes.id"))
     pool_type_id = Column(Integer, ForeignKey("pool_types.id"))
+
+    location = relationship("Pool", back_populates="pools")
+    fish = relationship("Fish", back_populates="pools")
+    pool_type = relationship("PoolType", back_populates="pools")
+
+    caviars = relationship("Caviar", back_populates="pool")
+    tasks = relationship("Task", back_populates="pool")
 
 
 class Caviar(Base):
@@ -180,6 +206,12 @@ class Caviar(Base):
     pool_id = Column(Integer, ForeignKey("pools.id"))
     caviar_breed_id = Column(Integer, ForeignKey("caviar_breeds.id"))
 
+    weight_class = relationship("WeightClass", back_populates="caviars")
+    length_class = relationship("LengthClass", back_populates="caviars")
+    ages = relationship("Ages", back_populates="caviars")
+    pool = relationship("Pool", back_populates="caviars")
+    caviar_breed = relationship("CaviarBreed", back_populates="caviars")
+
 
 class Shift(Base):
     __tablename__ = "shifts"
@@ -190,12 +222,20 @@ class Shift(Base):
     description = Column(String(999))
     user_id = Column(Integer, ForeignKey("users.id"))
 
+    user = relationship("User", back_populates="shifts")
+
+    tasks = relationship("Task", back_populates="shift")
+
 
 class Task(Base):
     __tablename__ = "tasks"
 
     id = Column(Integer, primary_key=True, index=True)
+    description = Column(String(999))
     shift_id = Column(Integer, ForeignKey("shifts.id"))
     pool_id = Column(Integer, ForeignKey("pools.id"))
-    description = Column(String(999))
     Location_id = Column(Integer, ForeignKey("locations.id"))
+
+    shift = relationship("Shift", back_populates="tasks")
+    pool = relationship("Pool", back_populates="tasks")
+    location = relationship("Location", back_populates="tasks")
