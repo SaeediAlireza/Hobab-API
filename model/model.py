@@ -11,6 +11,8 @@ class User(Base):
     password = Column(String(999))
     name = Column(String(999))
     user_type_id = Column(Integer, ForeignKey("user_types.id"))
+    start_work_time = Column(DateTime)
+    end_work_time = Column(DateTime)
 
     type = relationship("UserType", back_populates="type_users")
 
@@ -99,69 +101,101 @@ class Ages(Base):
     __tablename__ = "ageses"
 
     id = Column(Integer, primary_key=True, index=True)
+    start_age = Column(Integer)
+    end_age = Column(Integer)
 
 
 class LengthClass(Base):
     __tablename__ = "length_classes"
 
     id = Column(Integer, primary_key=True, index=True)
+    start_lenght = Column(Integer)
+    end_lenght = Column(Integer)
 
 
 class Location(Base):
     __tablename__ = "locations"
 
     id = Column(Integer, primary_key=True, index=True)
+    description = Column(String(999))
 
 
 class PoolType(Base):
     __tablename__ = "pool_types"
 
     id = Column(Integer, primary_key=True, index=True)
+    description = Column(String(999))
 
 
 class CaviarBredd(Base):
     __tablename__ = "caviar_breeds"
 
     id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(999))
 
 
 class WeightClass(Base):
     __tablename__ = "weight_classes"
 
     id = Column(Integer, primary_key=True, index=True)
+    start_weight = Column(Integer)
+    start_end = Column(Integer)
 
 
 class FishType(Base):
-    __tablename__ = "fish_type"
+    __tablename__ = "fish_types"
 
     id = Column(Integer, primary_key=True, index=True)
+    birth_of_fish = Column(DateTime)
 
 
-class Fishes(Base):
+class Fish(Base):
     __tablename__ = "fishes"
 
     id = Column(Integer, primary_key=True, index=True)
+    fish_type_id = Column(Integer, ForeignKey("fish_types.id"))
 
 
 class Pool(Base):
     __tablename__ = "pools"
 
     id = Column(Integer, primary_key=True, index=True)
+    description = Column(String(999))
+
+    Location_id = Column(Integer, ForeignKey("locations.id"))
+    fish_id = Column(Integer, ForeignKey("fishes.id"))
+    pool_type_id = Column(Integer, ForeignKey("pool_types.id"))
 
 
 class Caviar(Base):
     __tablename__ = "caviars"
 
     id = Column(Integer, primary_key=True, index=True)
+    weight = Column(Integer)
+    lenght = Column(Integer)
+    time_of_birth = Column(DateTime)
+    weight_class_id = Column(Integer, ForeignKey("weight_classes.id"))
+    length_class_id = Column(Integer, ForeignKey("length_classes.id"))
+    ages_id = Column(Integer, ForeignKey("ageses.id"))
+    pool_id = Column(Integer, ForeignKey("pools.id"))
+    caviar_breed_id = Column(Integer, ForeignKey("caviar_breeds.id"))
+
+
+class Shift(Base):
+    __tablename__ = "shifts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    description = Column(String(999))
+    user_id = Column(Integer, ForeignKey("users.id"))
 
 
 class Task(Base):
     __tablename__ = "tasks"
 
     id = Column(Integer, primary_key=True, index=True)
-
-
-class Shift(Base):
-    __tablename__ = "Shifts"
-
-    id = Column(Integer, primary_key=True, index=True)
+    shift_id = Column(Integer, ForeignKey("shifts.id"))
+    pool_id = Column(Integer, ForeignKey("pools.id"))
+    description = Column(String(999))
+    Location_id = Column(Integer, ForeignKey("locations.id"))
