@@ -119,6 +119,16 @@ class LengthClass(Base):
     caviars = relationship("Caviar", back_populates="length_class")
 
 
+class WeightClass(Base):
+    __tablename__ = "weight_classes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    start_weight = Column(Integer)
+    start_end = Column(Integer)
+
+    caviars = relationship("Caviar", back_populates="weight_class")
+
+
 class Location(Base):
     __tablename__ = "locations"
 
@@ -145,16 +155,6 @@ class CaviarBreed(Base):
     name = Column(String(999))
 
     caviars = relationship("Caviar", back_populates="caviar_breed")
-
-
-class WeightClass(Base):
-    __tablename__ = "weight_classes"
-
-    id = Column(Integer, primary_key=True, index=True)
-    start_weight = Column(Integer)
-    start_end = Column(Integer)
-
-    caviars = relationship("Caviar", back_populates="weight_class")
 
 
 class FishType(Base):
