@@ -100,3 +100,28 @@ class TransactionInfoResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+# ages
+
+# length class
+
+# weight class
+
+# location
+
+# pool type
+
+# caviar breed
+
+# fish type
+
+# fish
+
+# pool
+
+# caviar
+
+# shift
+
+# task
