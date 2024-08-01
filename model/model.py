@@ -165,9 +165,3 @@ class Shift(Base):
     __tablename__ = "Shifts"
 
     id = Column(Integer, primary_key=True, index=True)
-
-
-class A_________(Base):
-    __tablename__ = "A________"
-
-    id = Column(Integer, primary_key=True, index=True)
