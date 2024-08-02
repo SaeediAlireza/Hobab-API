@@ -250,6 +250,32 @@ class PoolInfoResponse(BaseModel):
 # caviar
 
 
+class CaviarAddReqest(BaseModel):
+    weight: int
+    lenght: int
+    time_of_birth: datetime
+    weight_class_id: int
+    length_class_id: int
+    ages_id: int
+    pool_id: int
+    caviar_breed_id: int
+
+
+class CaviarInfoResponse(BaseModel):
+    id: int
+    weight: int
+    lenght: int
+    time_of_birth: datetime
+    weight_class_id: WeightInfoResponse
+    length_class_id: LenghtInfoResponse
+    ages_id: AgesInfoResponse
+    pool_id: PoolInfoResponse
+    caviar_breed_id: CaviarBreedInfoResponse
+
+    class Config:
+        orm_mode = True
+
+
 # shift
 
 # task
