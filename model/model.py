@@ -185,8 +185,7 @@ class Pool(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     description = Column(String(999))
-
-    Location_id = Column(Integer, ForeignKey("locations.id"))
+    location_id = Column(Integer, ForeignKey("locations.id"))
     fish_id = Column(Integer, ForeignKey("fishes.id"))
     pool_type_id = Column(Integer, ForeignKey("pool_types.id"))
 

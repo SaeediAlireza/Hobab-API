@@ -240,14 +240,18 @@ class FishInfoResponse(BaseModel):
 
 
 class PoolAddRequest(BaseModel):
-    birth_of_fish: datetime
-    fish_breed_id: int
+    description: str
+    location_id: int
+    fish_id: int
+    pool_type_id: int
 
 
 class PoolInfoResponse(BaseModel):
     id: int
-    birth_of_fish: datetime
-    fish_breed: FishBreedInfoResponse
+    description: str
+    location_id: int
+    fish_id: int
+    pool_type_id: int
 
     class Config:
         orm_mode = True
