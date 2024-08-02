@@ -35,7 +35,7 @@ def create_user(
         return new_user
 
 
-@router.get("/by-type/{type_id}", response_model=List[schemas.UserResponseInfo])
+@router.get("/by-type/{type_id}", response_model=List[schemas.UserInfoResponse])
 def get_users_by_type(
     type_id: int,
     response: Response,
@@ -47,7 +47,7 @@ def get_users_by_type(
     return users
 
 
-@router.get("/all", response_model=List[schemas.UserResponseInfo])
+@router.get("/all", response_model=List[schemas.UserInfoResponse])
 def get_all_users(
     response: Response,
     db: Session = Depends(util.get_db),
@@ -58,7 +58,7 @@ def get_all_users(
     return users
 
 
-@router.get("/{user_id}", response_model=schemas.UserResponseInfo)
+@router.get("/{user_id}", response_model=schemas.UserInfoResponse)
 def get_user_by_id(
     user_id: int,
     response: Response,

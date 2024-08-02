@@ -35,7 +35,7 @@ class UserAddRequest(BaseModel):
     end_work_time: time
 
 
-class UserResponseInfo(BaseModel):
+class UserInfoResponse(BaseModel):
     user_name: str
     password: str
     name: str
@@ -277,5 +277,24 @@ class CaviarInfoResponse(BaseModel):
 
 
 # shift
+
+
+class ShiftAddReqest(BaseModel):
+    start_time: time
+    end_time: time
+    description: str
+    user_id: int
+
+
+class ShiftInfoResponse(BaseModel):
+    id: int
+    start_time: time
+    end_time: time
+    description: str
+    user: UserInfoResponse
+
+    class Config:
+        orm_mode = True
+
 
 # task
