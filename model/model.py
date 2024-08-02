@@ -124,7 +124,7 @@ class WeightClass(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     start_weight = Column(Integer)
-    start_end = Column(Integer)
+    end_weight = Column(Integer)
 
     caviars = relationship("Caviar", back_populates="weight_class")
 
@@ -153,6 +153,7 @@ class CaviarBreed(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(999))
+    description = Column(String(999))
 
     caviars = relationship("Caviar", back_populates="caviar_breed")
 

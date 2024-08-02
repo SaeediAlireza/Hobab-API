@@ -173,11 +173,13 @@ class LocationInfoResponse(BaseModel):
 
 class PoolTypeAddRequest(BaseModel):
     description: str
+    name: str
 
 
 class PoolTypeInfoResponse(BaseModel):
     id: int
     description: str
+    name: str
 
     class Config:
         orm_mode = True
