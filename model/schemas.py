@@ -155,6 +155,19 @@ class WeightInfoResponse(BaseModel):
 
 # location
 
+
+class LocationAddReqest(BaseModel):
+    description: str
+
+
+class LocationInfoResponse(BaseModel):
+    id: int
+    description: str
+
+    class Config:
+        orm_mode = True
+
+
 # pool type
 
 # caviar breed
