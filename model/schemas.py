@@ -123,14 +123,14 @@ class AgesInfoResponse(BaseModel):
 
 
 class LengthAddReqest(BaseModel):
-    start_lentgh: int
-    end_lentgh: int
+    start_length: int
+    end_length: int
 
 
 class LengthInfoResponse(BaseModel):
     id: int
-    start_lentgh: int
-    end_lentght: int
+    start_length: int
+    end_lentgth: int
 
     class Config:
         orm_mode = True

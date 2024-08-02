@@ -14,7 +14,7 @@ def create_length_class(
     db: Session = Depends(util.get_db),
 ):
     new_length_class = model.LengthClass(
-        start_length=request.start_lentgh, end_length=request.end_lentgh
+        start_length=request.start_length, end_length=request.end_length
     )
     db.add(new_length_class)
     db.commit()
