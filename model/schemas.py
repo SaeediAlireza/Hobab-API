@@ -139,6 +139,20 @@ class LenghtInfoResponse(BaseModel):
 # weight class
 
 
+class WeightAddReqest(BaseModel):
+    start_weight: int
+    end_weight: int
+
+
+class WeightInfoResponse(BaseModel):
+    id: int
+    start_weight: int
+    end_weight: int
+
+    class Config:
+        orm_mode = True
+
+
 # location
 
 # pool type
