@@ -113,8 +113,8 @@ class LengthClass(Base):
     __tablename__ = "length_classes"
 
     id = Column(Integer, primary_key=True, index=True)
-    start_lenght = Column(Integer)
-    end_lenght = Column(Integer)
+    start_length = Column(Integer)
+    end_length = Column(Integer)
 
     caviars = relationship("Caviar", back_populates="length_class")
 

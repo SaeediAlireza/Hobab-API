@@ -22,13 +22,13 @@ def create_quantity(
 
 @router.get("/all", response_model=List[schemas.QuantityInfoResponse])
 def get_all_quantities(db: Session = Depends(util.get_db)):
-    quanities = db.query(model.Quantity).all()
-    if not quanities:
+    quantities = db.query(model.Quantity).all()
+    if not quantities:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"
         )
     else:
-        return quanities
+        return quantities
 
 
 @router.get("/{id}", response_model=schemas.QuantityInfoResponse)

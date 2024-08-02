@@ -122,15 +122,15 @@ class AgesInfoResponse(BaseModel):
 # length class
 
 
-class LenghtAddReqest(BaseModel):
-    start_lenght: int
-    end_lenght: int
+class LengthAddReqest(BaseModel):
+    start_lentgh: int
+    end_lentgh: int
 
 
-class LenghtInfoResponse(BaseModel):
+class LengthInfoResponse(BaseModel):
     id: int
-    start_lenght: int
-    end_lenght: int
+    start_lentgh: int
+    end_lentght: int
 
     class Config:
         orm_mode = True
@@ -267,7 +267,7 @@ class CaviarInfoResponse(BaseModel):
     lenght: int
     time_of_birth: datetime
     weight_class_id: WeightInfoResponse
-    length_class_id: LenghtInfoResponse
+    length_class_id: LengthInfoResponse
     ages_id: AgesInfoResponse
     pool_id: PoolInfoResponse
     caviar_breed_id: CaviarBreedInfoResponse
