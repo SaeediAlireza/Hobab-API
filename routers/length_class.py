@@ -10,7 +10,7 @@ router = APIRouter(tags=["length class"], prefix="/length-class")
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
 def create_length_class(
-    request: schemas.LengthAddReqest,
+    request: schemas.LengthAddRequest,
     db: Session = Depends(util.get_db),
 ):
     new_length_class = model.LengthClass(

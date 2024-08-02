@@ -10,7 +10,7 @@ router = APIRouter(tags=["weight class"], prefix="/weight-class")
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
 def create_weight_class(
-    request: schemas.WeightAddReqest,
+    request: schemas.WeightAddRequest,
     db: Session = Depends(util.get_db),
 ):
     new_weight_class = model.WeightClass(

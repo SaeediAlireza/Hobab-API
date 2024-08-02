@@ -10,7 +10,7 @@ router = APIRouter(tags=["ages"], prefix="/ages")
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
 def create_ages(
-    request: schemas.AgesAddReqest,
+    request: schemas.AgesAddRequest,
     db: Session = Depends(util.get_db),
 ):
     new_ages = model.Ages(start_age=request.start_age, end_age=request.end_age)

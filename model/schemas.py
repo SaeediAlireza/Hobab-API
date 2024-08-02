@@ -86,7 +86,7 @@ class ItemAddRequest(BaseModel):
 # transaction
 
 
-class TransactionAddReqest(BaseModel):
+class TransactionAddRequest(BaseModel):
     input: bool
     amount: int
     transaction_time: datetime
@@ -105,7 +105,7 @@ class TransactionInfoResponse(BaseModel):
 
 
 # ages
-class AgesAddReqest(BaseModel):
+class AgesAddRequest(BaseModel):
     start_age: int
     end_age: int
 
@@ -122,7 +122,7 @@ class AgesInfoResponse(BaseModel):
 # length class
 
 
-class LengthAddReqest(BaseModel):
+class LengthAddRequest(BaseModel):
     start_length: int
     end_length: int
 
@@ -139,7 +139,7 @@ class LengthInfoResponse(BaseModel):
 # weight class
 
 
-class WeightAddReqest(BaseModel):
+class WeightAddRequest(BaseModel):
     start_weight: int
     end_weight: int
 
@@ -156,7 +156,7 @@ class WeightInfoResponse(BaseModel):
 # location
 
 
-class LocationAddReqest(BaseModel):
+class LocationAddRequest(BaseModel):
     description: str
 
 
@@ -171,7 +171,7 @@ class LocationInfoResponse(BaseModel):
 # pool type
 
 
-class PoolTypeAddReqest(BaseModel):
+class PoolTypeAddRequest(BaseModel):
     description: str
 
 
@@ -186,7 +186,7 @@ class PoolTypeInfoResponse(BaseModel):
 # caviar breed
 
 
-class CaviarBreedAddReqest(BaseModel):
+class CaviarBreedAddRequest(BaseModel):
     name: str
 
 
@@ -201,7 +201,7 @@ class CaviarBreedInfoResponse(BaseModel):
 # fish breed
 
 
-class FishBreedAddReqest(BaseModel):
+class FishBreedAddRequest(BaseModel):
     name: str
 
 
@@ -216,7 +216,7 @@ class FishBreedInfoResponse(BaseModel):
 # fish
 
 
-class FishAddReqest(BaseModel):
+class FishAddRequest(BaseModel):
     birth_of_fish: datetime
     fish_breed_id: int
 
@@ -233,7 +233,7 @@ class FishInfoResponse(BaseModel):
 # pool
 
 
-class PoolAddReqest(BaseModel):
+class PoolAddRequest(BaseModel):
     birth_of_fish: datetime
     fish_breed_id: int
 
@@ -250,7 +250,7 @@ class PoolInfoResponse(BaseModel):
 # caviar
 
 
-class CaviarAddReqest(BaseModel):
+class CaviarAddRequest(BaseModel):
     weight: int
     length: int
     time_of_birth: datetime
@@ -279,7 +279,7 @@ class CaviarInfoResponse(BaseModel):
 # shift
 
 
-class ShiftAddReqest(BaseModel):
+class ShiftAddRequest(BaseModel):
     start_time: time
     end_time: time
     description: str
@@ -300,7 +300,7 @@ class ShiftInfoResponse(BaseModel):
 # task
 
 
-class TaskAddReqest(BaseModel):
+class TaskAddRequest(BaseModel):
     description: str
     shift_id: int
     pool_id: int
