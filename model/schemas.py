@@ -185,6 +185,19 @@ class PoolTypeInfoResponse(BaseModel):
 
 # caviar breed
 
+
+class CaviarBreedAddReqest(BaseModel):
+    name: str
+
+
+class CaviarBreedInfoResponse(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        orm_mode = True
+
+
 # fish type
 
 # fish
