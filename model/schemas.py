@@ -105,6 +105,19 @@ class TransactionInfoResponse(BaseModel):
 
 
 # ages
+class AgesAddReqest(BaseModel):
+    start_age: int
+    end_age: int
+
+
+class AgesInfoResponse(BaseModel):
+    id: int
+    start_age: int
+    end_age: int
+
+    class Config:
+        orm_mode = True
+
 
 # length class
 
