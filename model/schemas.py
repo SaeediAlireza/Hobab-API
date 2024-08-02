@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, time
 
 
 # login
@@ -31,6 +31,8 @@ class UserAddRequest(BaseModel):
     password: str
     name: str
     user_type_id: int
+    start_work_time: time
+    end_work_time: time
 
 
 class UserResponseInfo(BaseModel):

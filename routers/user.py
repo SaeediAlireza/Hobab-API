@@ -19,6 +19,8 @@ def create_user(
         password=request.password,
         name=request.name,
         user_type_id=request.user_type_id,
+        start_work_time=request.start_work_time,
+        end_work_time=request.end_work_time,
     )
     user_exist = (
         db.query(model.User).filter(model.User.user_name == new_user.user_name).first()

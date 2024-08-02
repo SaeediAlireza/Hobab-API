@@ -1,5 +1,5 @@
 from model.database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, Time
 from sqlalchemy.orm import relationship
 
 
@@ -11,8 +11,8 @@ class User(Base):
     password = Column(String(999))
     name = Column(String(999))
     user_type_id = Column(Integer, ForeignKey("user_types.id"))
-    start_work_time = Column(DateTime)
-    end_work_time = Column(DateTime)
+    start_work_time = Column(Time)
+    end_work_time = Column(Time)
 
     type = relationship("UserType", back_populates="type_users")
 
