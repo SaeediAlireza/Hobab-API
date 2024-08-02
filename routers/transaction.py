@@ -11,7 +11,7 @@ router = APIRouter(tags=["transaction"], prefix="/transacion")
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
 def create_transaction(
-    request: schemas.TransactionAddReqest,
+    request: schemas.TransactionAddRequest,
     db: Session = Depends(util.get_db),
 ):
     new_item = model.Transaction(
