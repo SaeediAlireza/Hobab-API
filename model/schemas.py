@@ -121,7 +121,23 @@ class AgesInfoResponse(BaseModel):
 
 # length class
 
+
+class LenghtAddReqest(BaseModel):
+    start_lenght: int
+    end_lenght: int
+
+
+class LenghtInfoResponse(BaseModel):
+    id: int
+    start_lenght: int
+    end_lenght: int
+
+    class Config:
+        orm_mode = True
+
+
 # weight class
+
 
 # location
 
