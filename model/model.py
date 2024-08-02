@@ -143,6 +143,7 @@ class PoolType(Base):
     __tablename__ = "pool_types"
 
     id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(999))
     description = Column(String(999))
 
     pools = relationship("Pool", back_populates="pool_type")

@@ -190,11 +190,13 @@ class PoolTypeInfoResponse(BaseModel):
 
 class CaviarBreedAddRequest(BaseModel):
     name: str
+    description: str
 
 
 class CaviarBreedInfoResponse(BaseModel):
     id: int
     name: str
+    description: str
 
     class Config:
         orm_mode = True
