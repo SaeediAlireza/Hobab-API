@@ -298,3 +298,21 @@ class ShiftInfoResponse(BaseModel):
 
 
 # task
+
+
+class TaskAddReqest(BaseModel):
+    description: str
+    shift_id: int
+    pool_id: int
+    Location_id: int
+
+
+class TaskInfoResponse(BaseModel):
+    id: int
+    description: str
+    shift: ShiftInfoResponse
+    pool: PoolInfoResponse
+    Location: LocationInfoResponse
+
+    class Config:
+        orm_mode = True
