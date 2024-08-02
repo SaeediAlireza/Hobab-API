@@ -216,7 +216,36 @@ class FishBreedInfoResponse(BaseModel):
 # fish
 
 
+class FishAddReqest(BaseModel):
+    birth_of_fish: datetime
+    fish_breed_id: int
+
+
+class FishInfoResponse(BaseModel):
+    id: int
+    birth_of_fish: datetime
+    fish_breed: FishBreedInfoResponse
+
+    class Config:
+        orm_mode = True
+
+
 # pool
+
+
+class PoolAddReqest(BaseModel):
+    birth_of_fish: datetime
+    fish_breed_id: int
+
+
+class PoolInfoResponse(BaseModel):
+    id: int
+    birth_of_fish: datetime
+    fish_breed: FishBreedInfoResponse
+
+    class Config:
+        orm_mode = True
+
 
 # caviar
 
