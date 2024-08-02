@@ -157,21 +157,22 @@ class CaviarBreed(Base):
     caviars = relationship("Caviar", back_populates="caviar_breed")
 
 
-class FishType(Base):
-    __tablename__ = "fish_types"
+class FishBreed(Base):
+    __tablename__ = "fish_breeds"
 
     id = Column(Integer, primary_key=True, index=True)
-    birth_of_fish = Column(DateTime)
-    fishes = relationship("Fish", back_populates="fish_type")
+    name = Column(String(999))
+    fishes = relationship("Fish", back_populates="fish_breed")
 
 
 class Fish(Base):
     __tablename__ = "fishes"
 
     id = Column(Integer, primary_key=True, index=True)
-    fish_type_id = Column(Integer, ForeignKey("fish_types.id"))
+    birth_of_fish = Column(DateTime)
+    fish_breed_id = Column(Integer, ForeignKey("fish_breeds.id"))
 
-    fish_type = relationship("FishType", back_populates="fishes")
+    fish_breed = relationship("FishBreed", back_populates="fishes")
     pools = relationship("Pool", back_populates="location")
 
 
