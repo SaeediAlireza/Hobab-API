@@ -252,7 +252,7 @@ class PoolInfoResponse(BaseModel):
 
 class CaviarAddReqest(BaseModel):
     weight: int
-    lenght: int
+    length: int
     time_of_birth: datetime
     weight_class_id: int
     length_class_id: int
@@ -264,7 +264,7 @@ class CaviarAddReqest(BaseModel):
 class CaviarInfoResponse(BaseModel):
     id: int
     weight: int
-    lenght: int
+    length: int
     time_of_birth: datetime
     weight_class_id: WeightInfoResponse
     length_class_id: LengthInfoResponse

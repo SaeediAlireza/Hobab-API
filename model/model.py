@@ -199,7 +199,7 @@ class Caviar(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     weight = Column(Integer)
-    lenght = Column(Integer)
+    length = Column(Integer)
     time_of_birth = Column(DateTime)
     weight_class_id = Column(Integer, ForeignKey("weight_classes.id"))
     length_class_id = Column(Integer, ForeignKey("length_classes.id"))
