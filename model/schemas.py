@@ -22,7 +22,7 @@ class UserTypeInfo(BaseModel):
     name: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # user
@@ -42,7 +42,7 @@ class UserInfoResponse(BaseModel):
     type: UserTypeInfo
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # quantity
@@ -57,7 +57,7 @@ class QuantityInfoResponse(BaseModel):
     name: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # category
@@ -101,7 +101,7 @@ class TransactionInfoResponse(BaseModel):
     item_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # ages
@@ -116,7 +116,7 @@ class AgesInfoResponse(BaseModel):
     end_age: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # length class
@@ -133,7 +133,7 @@ class LengthInfoResponse(BaseModel):
     end_lentgth: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # weight class
@@ -150,7 +150,7 @@ class WeightInfoResponse(BaseModel):
     end_weight: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # location
@@ -165,7 +165,7 @@ class LocationInfoResponse(BaseModel):
     description: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # pool type
@@ -182,7 +182,7 @@ class PoolTypeInfoResponse(BaseModel):
     name: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # caviar breed
@@ -199,7 +199,7 @@ class CaviarBreedInfoResponse(BaseModel):
     description: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # fish breed
@@ -216,7 +216,7 @@ class FishBreedInfoResponse(BaseModel):
     description: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # fish
@@ -233,7 +233,7 @@ class FishInfoResponse(BaseModel):
     fish_breed: FishBreedInfoResponse
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # pool
@@ -254,7 +254,7 @@ class PoolInfoResponse(BaseModel):
     pool_type_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # caviar
@@ -283,7 +283,7 @@ class CaviarInfoResponse(BaseModel):
     caviar_breed_id: CaviarBreedInfoResponse
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # shift
@@ -304,7 +304,7 @@ class ShiftInfoResponse(BaseModel):
     user: UserInfoResponse
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # task
@@ -325,4 +325,4 @@ class TaskInfoResponse(BaseModel):
     Location: LocationInfoResponse
 
     class Config:
-        orm_mode = True
+        from_attributes = True
