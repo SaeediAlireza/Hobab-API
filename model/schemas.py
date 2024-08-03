@@ -46,8 +46,6 @@ class UserInfoResponse(BaseModel):
 
 
 # quantity
-
-
 class QuantityAddRequest(BaseModel):
     name: str
 
@@ -66,16 +64,12 @@ class CategoryAddRequest(BaseModel):
 
 
 # sub category
-
-
 class SubCategoryAddRequest(BaseModel):
     dom_categorie_id: int
     sub_categorie_id: int
 
 
 # item
-
-
 class ItemAddRequest(BaseModel):
     name: str
     count: int
@@ -84,8 +78,6 @@ class ItemAddRequest(BaseModel):
 
 
 # transaction
-
-
 class TransactionAddRequest(BaseModel):
     input: bool
     amount: int
@@ -120,8 +112,6 @@ class AgesInfoResponse(BaseModel):
 
 
 # length class
-
-
 class LengthAddRequest(BaseModel):
     start_length: int
     end_length: int
@@ -137,8 +127,6 @@ class LengthInfoResponse(BaseModel):
 
 
 # weight class
-
-
 class WeightAddRequest(BaseModel):
     start_weight: int
     end_weight: int
@@ -154,8 +142,6 @@ class WeightInfoResponse(BaseModel):
 
 
 # location
-
-
 class LocationAddRequest(BaseModel):
     description: str
 
@@ -169,8 +155,6 @@ class LocationInfoResponse(BaseModel):
 
 
 # pool type
-
-
 class PoolTypeAddRequest(BaseModel):
     description: str
     name: str
@@ -186,8 +170,6 @@ class PoolTypeInfoResponse(BaseModel):
 
 
 # caviar breed
-
-
 class CaviarBreedAddRequest(BaseModel):
     name: str
     description: str
@@ -203,8 +185,6 @@ class CaviarBreedInfoResponse(BaseModel):
 
 
 # fish breed
-
-
 class FishBreedAddRequest(BaseModel):
     name: str
     description: str
@@ -220,8 +200,6 @@ class FishBreedInfoResponse(BaseModel):
 
 
 # fish
-
-
 class FishAddRequest(BaseModel):
     birth_of_fish: datetime
     fish_breed_id: int
@@ -237,8 +215,6 @@ class FishInfoResponse(BaseModel):
 
 
 # pool
-
-
 class PoolAddRequest(BaseModel):
     description: str
     location_id: int
@@ -258,8 +234,6 @@ class PoolInfoResponse(BaseModel):
 
 
 # caviar
-
-
 class CaviarAddRequest(BaseModel):
     weight: int
     length: int
@@ -287,8 +261,6 @@ class CaviarInfoResponse(BaseModel):
 
 
 # shift
-
-
 class ShiftAddRequest(BaseModel):
     start_time: time
     end_time: time
@@ -308,8 +280,6 @@ class ShiftInfoResponse(BaseModel):
 
 
 # task
-
-
 class TaskAddRequest(BaseModel):
     description: str
     shift_id: int
