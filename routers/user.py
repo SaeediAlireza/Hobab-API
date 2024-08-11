@@ -16,7 +16,7 @@ def create_user(
 ):
     new_user = model.User(
         user_name=request.user_name,
-        password=request.password,
+        password=util.hash(request.password),
         name=request.name,
         user_type_id=request.user_type_id,
         start_work_time=request.start_work_time,
