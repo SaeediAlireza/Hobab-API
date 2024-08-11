@@ -177,7 +177,7 @@ class Fish(Base):
     fish_breed_id = Column(Integer, ForeignKey("fish_breeds.id"))
 
     fish_breed = relationship("FishBreed", back_populates="fishes")
-    pools = relationship("Pool", back_populates="location")
+    pools = relationship("Pool", back_populates="fish")
 
 
 class Pool(Base):
@@ -189,7 +189,7 @@ class Pool(Base):
     fish_id = Column(Integer, ForeignKey("fishes.id"))
     pool_type_id = Column(Integer, ForeignKey("pool_types.id"))
 
-    location = relationship("Pool", back_populates="pools")
+    location = relationship("Location", back_populates="pools")
     fish = relationship("Fish", back_populates="pools")
     pool_type = relationship("PoolType", back_populates="pools")
 
