@@ -2,6 +2,8 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session
+from sqlalchemy import update
 
 from util import util
 
@@ -65,7 +67,23 @@ def get_user_by_id(
     db: Session = Depends(util.get_db),
 ):
     user = db.query(model.User).filter(model.User.id == user_id).first()
-    print(user)
     if not user:
         response.status_code = status.HTTP_404_NOT_FOUND
+    return user
+
+
+@router.put("update")
+def update_user(
+    response: Response,
+    request: schemas.UserUpdateRequest,
+    db: Session = Depends(util.get_db),
+):
+    user = db.query(model.User).filter(model.User.id == request.id).first()
+
+    if not user:
+        response.status_code = status.HTTP_404_NOT_FOUND
+    user = request
+
+    db.commit()
+    db.refresh(user)
     return user

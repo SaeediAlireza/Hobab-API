@@ -35,6 +35,19 @@ class UserAddRequest(BaseModel):
     end_work_time: time
 
 
+class UserUpdateRequest(BaseModel):
+    id: int
+    user_name: str
+    password: str
+    name: str
+    user_type_id: int
+    start_work_time: time
+    end_work_time: time
+
+    class Config:
+        from_attributes = True
+
+
 class UserInfoResponse(BaseModel):
     user_name: str
     password: str
