@@ -49,6 +49,7 @@ class UserUpdateRequest(BaseModel):
 
 
 class UserInfoResponse(BaseModel):
+    id: int
     user_name: str
     password: str
     name: str

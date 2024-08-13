@@ -66,7 +66,9 @@ def get_user_by_id(
     response: Response,
     db: Session = Depends(util.get_db),
 ):
+
     user = db.query(model.User).filter(model.User.id == user_id).first()
+
     if not user:
         response.status_code = status.HTTP_404_NOT_FOUND
     return user
@@ -78,12 +80,16 @@ def update_user(
     request: schemas.UserUpdateRequest,
     db: Session = Depends(util.get_db),
 ):
-    user = db.query(model.User).filter(model.User.id == request.id).first()
-
-    if not user:
+    db_user = db.query(model.User).filter(model.User.id == request.id).first()
+    if not db_user:
         response.status_code = status.HTTP_404_NOT_FOUND
-    user = request
+    print(db_user)
+    db_user.end_work_time = request.end_work_time
+    db_user.name = request.name
+    db_user.password = request.password
+    db_user.start_work_time = request.start_work_time
+    db_user.user_type_id = request.user_type_id
 
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(db_user)
+    return db_user
