@@ -60,20 +60,6 @@ def get_all_users(
     return users
 
 
-@router.get("/delete/{user_id}")
-def delete_user_by_id(
-    user_id: int,
-    response: Response,
-    db: Session = Depends(util.get_db),
-):
-    user = db.query(model.User).filter(model.User.id == user_id).first()
-    if not user:
-        response.status_code = status.HTTP_404_NOT_FOUND
-    db.delete(user)
-    db.commit()
-    return {"detail": "Item deleted successfully"}
-
-
 @router.get("/{user_id}", response_model=schemas.UserInfoResponse)
 def get_user_by_id(
     user_id: int,
@@ -106,3 +92,17 @@ def update_user(
     db.commit()
     db.refresh(db_user)
     return db_user
+
+
+@router.get("/delete/{user_id}")
+def delete_user_by_id(
+    user_id: int,
+    response: Response,
+    db: Session = Depends(util.get_db),
+):
+    user = db.query(model.User).filter(model.User.id == user_id).first()
+    if not user:
+        response.status_code = status.HTTP_404_NOT_FOUND
+    db.delete(user)
+    db.commit()
+    return {"detail": "Item deleted successfully"}
