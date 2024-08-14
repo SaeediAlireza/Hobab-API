@@ -80,18 +80,18 @@ def update_user(
     request: schemas.UserUpdateRequest,
     db: Session = Depends(util.get_db),
 ):
-    db_user = db.query(model.User).filter(model.User.id == request.id).first()
-    if not db_user:
+    user = db.query(model.User).filter(model.User.id == request.id).first()
+    if not user:
         response.status_code = status.HTTP_404_NOT_FOUND
-    print(db_user)
-    db_user.end_work_time = request.end_work_time
-    db_user.name = request.name
-    db_user.start_work_time = request.start_work_time
-    db_user.user_type_id = request.user_type_id
+    user.end_work_time = request.end_work_time
+    user.name = request.name
+    user.user_name = request.user_name
+    user.start_work_time = request.start_work_time
+    user.user_type_id = request.user_type_id
 
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(user)
+    return user
 
 
 @router.get("/delete/{user_id}")

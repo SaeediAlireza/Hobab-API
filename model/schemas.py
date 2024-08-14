@@ -17,6 +17,11 @@ class UserTypeAddRequest(BaseModel):
     name: str
 
 
+class UserTypeUpdateRequest(BaseModel):
+    id: int
+    name: str
+
+
 class UserTypeInfo(BaseModel):
     id: int
     name: str
