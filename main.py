@@ -28,15 +28,14 @@ app = FastAPI()
 model.Base.metadata.create_all(database.engine)
 
 
-origins = ["*"]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 app.include_router(routers.ages.router)
 app.include_router(routers.authentication.router)
