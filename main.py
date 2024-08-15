@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 import routers
-
 from model import database, model
+import ssl
+
 import routers.ages
 import routers.authentication
 import routers.category
@@ -25,8 +26,6 @@ import routers.weight_class
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-model.Base.metadata.create_all(database.engine)
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -35,8 +34,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+ssl_context.load_cert_chain("./cert.pem", keyfile="./key.pem")
 
 
+model.Base.metadata.create_all(database.engine)
 app.include_router(routers.ages.router)
 app.include_router(routers.authentication.router)
 app.include_router(routers.caviar_breed.router)
