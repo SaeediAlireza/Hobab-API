@@ -2,6 +2,14 @@ from pydantic import BaseModel
 from datetime import datetime, time
 
 
+# login
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user_name: str
+    name: str
+
+
 class TokenData(BaseModel):
     username: str | None = None
 
@@ -56,13 +64,6 @@ class UserInfoResponse(BaseModel):
 
     class Config:
         from_attributes = True
-
-
-# login
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-    user: UserInfoResponse
 
 
 # quantity
