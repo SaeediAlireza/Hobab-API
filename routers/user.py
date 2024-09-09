@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import Session
-from sqlalchemy import update
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -25,7 +25,10 @@ def create_user(
         end_work_time=request.end_work_time,
     )
     user_exist = (
-        db.query(model.User).filter(model.User.user_name == new_user.user_name).first()
+        db.query(model.User)
+        .filter(model.User.user_name == new_user.user_name)
+        .order_by(desc(model.User.id))
+        .first()
     )
 
     if user_exist:
