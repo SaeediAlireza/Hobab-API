@@ -55,11 +55,10 @@ def update_user_type(
     request: schemas.UserTypeUpdateRequest,
     db: Session = Depends(util.get_db),
 ):
-    user_type = db.query(model.UserType).filter(model.User.id == request.id).first()
+    user_type = db.query(model.UserType).filter(model.UserType.id == request.id).first()
     if not user_type:
         response.status_code = status.HTTP_404_NOT_FOUND
     user_type.name = request.name
-
     db.commit()
     db.refresh(user_type)
     return user_type
