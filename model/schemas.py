@@ -291,8 +291,8 @@ class ShiftAddRequest(BaseModel):
 
 class ShiftInfoResponse(BaseModel):
     id: int
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     description: str
     user: UserInfoResponse
 
