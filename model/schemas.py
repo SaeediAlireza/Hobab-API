@@ -283,8 +283,8 @@ class CaviarInfoResponse(BaseModel):
 
 # shift
 class ShiftAddRequest(BaseModel):
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     description: str
     user_id: int
 

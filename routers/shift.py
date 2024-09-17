@@ -18,6 +18,7 @@ def create_shift(
         start_time=request.start_time,
         end_time=request.end_time,
         description=request.description,
+        user_id=request.user_id,
     )
     db.add(new_shift)
     db.commit()
