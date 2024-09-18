@@ -4,6 +4,7 @@ from model import model, schemas
 from sqlalchemy.orm import Session
 
 from util import util
+from sqlalchemy import update, desc
 
 
 router = APIRouter(tags=["category"], prefix="/category")

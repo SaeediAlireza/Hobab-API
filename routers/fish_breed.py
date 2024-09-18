@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -25,7 +26,7 @@ def create_fish_breed(
 
 @router.get("/all", response_model=List[schemas.FishBreedInfoResponse])
 def get_all_fish_breedes(db: Session = Depends(util.get_db)):
-    fish_breedes = db.query(model.FishBreed).all()
+    fish_breedes = db.query(model.FishBreed).order_by(desc(model.FishBreed.id)).all()
     if not fish_breedes:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

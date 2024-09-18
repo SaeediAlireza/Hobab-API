@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -31,7 +32,7 @@ def create_caviar(
 
 @router.get("/all", response_model=List[schemas.CaviarInfoResponse])
 def get_all_quantities(db: Session = Depends(util.get_db)):
-    quantities = db.query(model.Caviar).all()
+    quantities = db.query(model.Caviar).order_by(desc(model.Caviar.id)).all()
     if not quantities:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"

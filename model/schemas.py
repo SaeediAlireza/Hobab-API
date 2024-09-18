@@ -6,6 +6,8 @@ from datetime import datetime, time
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user_name: str
+    name: str
 
 
 class TokenData(BaseModel):
@@ -281,16 +283,16 @@ class CaviarInfoResponse(BaseModel):
 
 # shift
 class ShiftAddRequest(BaseModel):
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     description: str
     user_id: int
 
 
 class ShiftInfoResponse(BaseModel):
     id: int
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     description: str
     user: UserInfoResponse
 

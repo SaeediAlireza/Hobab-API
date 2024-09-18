@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -25,7 +26,9 @@ def create_caviar_breed(
 
 @router.get("/all", response_model=List[schemas.CaviarBreedInfoResponse])
 def get_all_caviar_breedes(db: Session = Depends(util.get_db)):
-    caviar_breedes = db.query(model.CaviarBreed).all()
+    caviar_breedes = (
+        db.query(model.CaviarBreed).order_by(desc(model.CaviarBreed.id)).all()
+    )
     if not caviar_breedes:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

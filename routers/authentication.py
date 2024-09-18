@@ -25,4 +25,9 @@ def login(
             status_code=status.HTTP_404_NOT_FOUND, detail="invalid username"
         )
     access_token = util.create_access_token(data={"sub": user.user_name})
-    return schemas.Token(access_token=access_token, token_type="bearer")
+    return schemas.Token(
+        access_token=access_token,
+        token_type="bearer",
+        user_name=str(user.user_name),
+        name=str(user.name),
+    )

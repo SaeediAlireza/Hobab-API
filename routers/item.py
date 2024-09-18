@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
