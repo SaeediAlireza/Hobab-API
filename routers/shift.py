@@ -27,11 +27,11 @@ def create_shift(
 
 
 @router.get("/all", response_model=List[schemas.ShiftInfoResponse])
-def get_all_quantities(db: Session = Depends(util.get_db)):
+def get_all_shifts(db: Session = Depends(util.get_db)):
     quantities = db.query(model.Shift).order_by(desc(model.Shift.id)).all()
     if not quantities:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any shifts"
         )
     else:
         return quantities
@@ -43,7 +43,7 @@ def get_shift_by_id(id: int, db: Session = Depends(util.get_db)):
     if not shift:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"there is't any shift with the id {id}",
+            detail=f"there isn't any shift with the id {id}",
         )
     else:
         return shift
