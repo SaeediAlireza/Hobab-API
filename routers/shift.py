@@ -49,26 +49,6 @@ def get_shift_by_id(id: int, db: Session = Depends(util.get_db)):
         return shift
 
 
-# @router.put("update")
-# def update_shift(
-#     response: Response,
-#     request: schemas.ShiftUpdateRequest,
-#     db: Session = Depends(util.get_db),
-# ):
-#     Shift = db.query(model.Shift).filter(model.Shift.id == request.id).first()
-#     if not Shift:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#     Shift. = request.end_work_time
-#     Shift.name = request.name
-#     Shift.Shift_name = request.Shift_name
-#     Shift.start_work_time = request.start_work_time
-#     Shift.Shift_type_id = request.Shift_type_id
-
-#     db.commit()
-#     db.refresh(Shift)
-#     return Shift
-
-
 @router.get("/delete/{Shift_id}")
 def delete_shift_by_id(
     Shift_id: int,
