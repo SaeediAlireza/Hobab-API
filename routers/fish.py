@@ -35,6 +35,26 @@ def get_all_quantities(db: Session = Depends(util.get_db)):
         return quantities
 
 
+@router.get(
+    "/all-fish-location-pooltype/", response_model=schemas.PoolFishLocationInfoResponse
+)
+def get_all_quantities(db: Session = Depends(util.get_db)):
+    fishes = db.query(model.Fish).order_by(desc(model.Fish.id)).all()
+    locations = db.query(model.Location).order_by(desc(model.Location.id)).all()
+    pool_types = db.query(model.PoolType).order_by(desc(model.PoolType.id)).all()
+    response = schemas.PoolFishLocationInfoResponse(
+        pool_types=pool_types,
+        locations=locations,
+        fishes=fishes,
+    )
+    if not response:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"
+        )
+    else:
+        return response
+
+
 @router.get("/{id}", response_model=schemas.FishInfoResponse)
 def get_fish_by_id(id: int, db: Session = Depends(util.get_db)):
     fish = db.query(model.Fish).filter(model.Fish.id == id).first()

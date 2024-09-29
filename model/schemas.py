@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 from datetime import datetime, time
 
@@ -141,7 +142,7 @@ class LengthAddRequest(BaseModel):
 class LengthInfoResponse(BaseModel):
     id: int
     start_length: int
-    end_lentgth: int
+    end_length: int
 
     class Config:
         from_attributes = True
@@ -314,6 +315,15 @@ class TaskInfoResponse(BaseModel):
     shift: ShiftInfoResponse
     pool: PoolInfoResponse
     Location: LocationInfoResponse
+
+    class Config:
+        from_attributes = True
+
+
+class PoolFishLocationInfoResponse(BaseModel):
+    fishes: List[FishInfoResponse]
+    locations: List[LocationInfoResponse]
+    pool_types: List[PoolTypeInfoResponse]
 
     class Config:
         from_attributes = True
