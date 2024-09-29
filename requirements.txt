@@ -6,3 +6,4 @@ bcrypt
 PyJWT
 python-jose
 pymysql
+python-multipart

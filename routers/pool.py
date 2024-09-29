@@ -16,7 +16,7 @@ def create_pool(
 ):
     new_pool = model.Pool(
         description=request.description,
-        Location_id=request.location_id,
+        location_id=request.location_id,
         fish_id=request.fish_id,
         pool_type_id=request.pool_type_id,
     )
