@@ -314,10 +314,13 @@ class TaskInfoResponse(BaseModel):
     description: str
     shift: ShiftInfoResponse
     pool: PoolInfoResponse
-    Location: LocationInfoResponse
+    location: LocationInfoResponse
 
     class Config:
         from_attributes = True
+
+
+# special
 
 
 class PoolFishLocationInfoResponse(BaseModel):
