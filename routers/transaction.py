@@ -28,6 +28,31 @@ def create_transaction(
     return new_item
 
 
+@router.get("/all", response_model=List[schemas.TransactionInfoResponse])
+def get_all_transactions(db: Session = Depends(util.get_db)):
+    transactions = (
+        db.query(model.Transaction).order_by(desc(model.Transaction.id)).all()
+    )
+    if not transactions:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any Transactions"
+        )
+    else:
+        return transactions
+
+
+@router.get("/{id}", response_model=schemas.TransactionInfoResponse)
+def get_transaction_by_id(id: int, db: Session = Depends(util.get_db)):
+    transaction = db.query(model.Transaction).filter(model.Transaction.id == id).first()
+    if not transaction:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"there is't any transaction with the id {id}",
+        )
+    else:
+        return transaction
+
+
 @router.get("last", response_model=schemas.TransactionInfoResponse)
 def get_last_transaction(
     response: Response,
