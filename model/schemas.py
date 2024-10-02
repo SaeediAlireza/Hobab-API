@@ -112,7 +112,15 @@ class ItemAddRequest(BaseModel):
     name: str
     count: int
     quantity_id: int
-    category_id: int
+    categorie_id: int
+
+
+class ItemInfoResponse(BaseModel):
+    id: int
+    name: str
+    count: int
+    quantity_id: int
+    categorie_id: int
 
 
 # transaction
