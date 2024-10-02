@@ -80,15 +80,31 @@ class QuantityInfoResponse(BaseModel):
         from_attributes = True
 
 
+# sub category
+class SubCategoryAddRequest(BaseModel):
+    dom_categorie_id: int
+    sub_categorie_id: int
+
+
+class CategoryInfoBase(BaseModel):
+    id: int
+    name: str
+
+
+class SubCategoryInfoResponse(BaseModel):
+    # dom: CategoryInfoBase
+    sub: CategoryInfoBase
+
+
 # category
 class CategoryAddRequest(BaseModel):
     name: str
 
 
-# sub category
-class SubCategoryAddRequest(BaseModel):
-    dom_categorie_id: int
-    sub_categorie_id: int
+class CategoryInfoResponse(BaseModel):
+    id: int
+    name: str
+    sub_categorie: List[SubCategoryInfoResponse]
 
 
 # item
