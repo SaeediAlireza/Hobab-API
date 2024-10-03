@@ -41,6 +41,19 @@ def get_all_transactions(db: Session = Depends(util.get_db)):
         return transactions
 
 
+@router.get("/all/head", response_model=List[schemas.TransactionInfoResponse])
+def get_last_15_transactions(db: Session = Depends(util.get_db)):
+    transactions = (
+        db.query(model.Transaction).order_by(desc(model.Transaction.id)).limit(15).all()
+    )
+    if not transactions:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any Transactions"
+        )
+    else:
+        return transactions
+
+
 @router.get("/{id}", response_model=schemas.TransactionInfoResponse)
 def get_transaction_by_id(id: int, db: Session = Depends(util.get_db)):
     transaction = db.query(model.Transaction).filter(model.Transaction.id == id).first()
@@ -53,7 +66,7 @@ def get_transaction_by_id(id: int, db: Session = Depends(util.get_db)):
         return transaction
 
 
-@router.get("last", response_model=schemas.TransactionInfoResponse)
+@router.get("/last", response_model=schemas.TransactionInfoResponse)
 def get_last_transaction(
     response: Response,
     db: Session = Depends(util.get_db),
