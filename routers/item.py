@@ -29,13 +29,24 @@ def create_item(
 
 
 @router.get("/all/{id}", response_model=List[schemas.ItemInfoResponse])
-def get_all_items(id: int, db: Session = Depends(util.get_db)):
+def get_all_items_by_categorie(id: int, db: Session = Depends(util.get_db)):
     items = (
         db.query(model.Item)
         .filter(model.Item.categorie_id == id)
         .order_by(desc(model.Item.id))
         .all()
     )
+    if not items:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any items"
+        )
+    else:
+        return items
+
+
+@router.get("/all", response_model=List[schemas.ItemInfoResponse])
+def get_all_items(db: Session = Depends(util.get_db)):
+    items = db.query(model.Item).order_by(desc(model.Item.id)).all()
     if not items:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any items"
