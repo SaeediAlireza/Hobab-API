@@ -15,6 +15,23 @@ def create_transaction(
     request: schemas.TransactionAddRequest,
     db: Session = Depends(util.get_db),
 ):
+    # Update Item:
+    item = db.query(model.Item).filter(model.Item.id == request.item_id).first()
+    if not item:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="the Item dose not exist"
+        )
+    if request.input:
+        item.count = item.count + request.amount
+    else:
+        if item.count < request.amount:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="the Item dose not have that mutch amount",
+            )
+        item.count = item.count - request.amount
+    db.commit()
+    # transaction:
     new_item = model.Transaction(
         input=request.input,
         amount=request.amount,
