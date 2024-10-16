@@ -306,6 +306,11 @@ class CaviarInfoResponse(BaseModel):
         from_attributes = True
 
 
+class CaviarPredictionRequest(BaseModel):
+    age: float
+    length: float
+
+
 # shift
 class ShiftAddRequest(BaseModel):
     start_time: datetime
