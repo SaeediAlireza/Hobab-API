@@ -128,7 +128,7 @@ class TransactionAddRequest(BaseModel):
     input: bool
     amount: int
     transaction_time: datetime
-    item_id: int
+    items_id: int
 
 
 class TransactionInfoResponse(BaseModel):
@@ -136,7 +136,7 @@ class TransactionInfoResponse(BaseModel):
     input: bool
     amount: int
     transaction_time: datetime
-    item_id: int
+    items_id: int
 
     class Config:
         from_attributes = True

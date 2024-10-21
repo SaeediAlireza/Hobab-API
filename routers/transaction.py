@@ -36,7 +36,7 @@ def create_transaction(
         input=request.input,
         amount=request.amount,
         transaction_time=request.transaction_time,
-        items_id=request.item_id,
+        items_id=request.items_id,
     )
 
     db.add(new_item)
