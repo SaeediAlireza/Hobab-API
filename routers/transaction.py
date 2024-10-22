@@ -103,3 +103,19 @@ def get_last_transaction(
     if not last_transaction:
         response.status_code = status.HTTP_404_NOT_FOUND
     return last_transaction
+
+
+@router.get("/by-item/{id}", response_model=List[schemas.TransactionInfoResponse])
+def get_transactions_by_item_id(id: int, db: Session = Depends(util.get_db)):
+    transactions = (
+        db.query(model.Transaction)
+        .order_by(desc(model.Transaction.id))
+        .filter(model.Transaction.items_id == id)
+        .all()
+    )
+    if not transactions:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any Transactions"
+        )
+    else:
+        return transactions
