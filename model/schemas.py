@@ -111,6 +111,7 @@ class CategoryInfoResponse(BaseModel):
 class ItemAddRequest(BaseModel):
     name: str
     count: int
+    limit: int
     quantity_id: int
     categorie_id: int
 
@@ -121,6 +122,12 @@ class ItemInfoResponse(BaseModel):
     count: int
     quantity_id: int
     categorie_id: int
+
+
+# alert
+class AlertInfoResponse(BaseModel):
+    id: int
+    item_id: int
 
 
 # transaction

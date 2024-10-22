@@ -16,10 +16,10 @@ def create_transaction(
     db: Session = Depends(util.get_db),
 ):
     # Update Item:
-    item = db.query(model.Item).filter(model.Item.id == request.item_id).first()
+    item = db.query(model.Item).filter(model.Item.id == request.items_id).first()
     if not item:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="the Item dose not exist"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="the Item dose not exist"
         )
     if request.input:
         item.count = item.count + request.amount
@@ -30,6 +30,7 @@ def create_transaction(
                 detail="the Item dose not have that mutch amount",
             )
         item.count = item.count - request.amount
+
     db.commit()
     # transaction:
     new_item = model.Transaction(
@@ -42,7 +43,15 @@ def create_transaction(
     db.add(new_item)
     db.commit()
     db.refresh(new_item)
-    return new_item
+    result = new_item
+    if new_item.item.count < new_item.item.limit:
+        new_alert = model.Alert(
+            seen=False, alert_time=new_item.transaction_time, item_id=new_item.items_id
+        )
+        db.add(new_alert)
+        db.commit()
+
+    return result
 
 
 @router.get("/all", response_model=List[schemas.TransactionInfoResponse])

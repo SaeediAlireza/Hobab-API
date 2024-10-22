@@ -18,6 +18,7 @@ def create_item(
     new_item = model.Item(
         name=request.name,
         count=request.count,
+        limit=request.limit,
         quantity_id=request.quantity_id,
         categorie_id=request.categorie_id,
     )
