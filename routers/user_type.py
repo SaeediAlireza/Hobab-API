@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
 from util import util
+from sqlalchemy import update, desc
 
 
 router = APIRouter(tags=["user type"], prefix="/user-type")
@@ -28,7 +29,7 @@ def get_all_user_types(
     response: Response,
     db: Session = Depends(util.get_db),
 ):
-    user_types = db.query(model.UserType).all()
+    user_types = db.query(model.UserType).order_by(desc(model.UserType.id)).all()
     if not user_types:
         response.status_code = status.HTTP_404_NOT_FOUND
     return user_types
@@ -54,11 +55,10 @@ def update_user_type(
     request: schemas.UserTypeUpdateRequest,
     db: Session = Depends(util.get_db),
 ):
-    user_type = db.query(model.UserType).filter(model.User.id == request.id).first()
+    user_type = db.query(model.UserType).filter(model.UserType.id == request.id).first()
     if not user_type:
         response.status_code = status.HTTP_404_NOT_FOUND
     user_type.name = request.name
-
     db.commit()
     db.refresh(user_type)
     return user_type

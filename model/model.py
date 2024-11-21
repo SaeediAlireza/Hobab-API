@@ -17,6 +17,7 @@ class User(Base):
     type = relationship("UserType", back_populates="type_users")
 
     shifts = relationship("Shift", back_populates="user")
+    transactions = relationship("Transaction", back_populates="user")
 
 
 class UserType(Base):
@@ -35,9 +36,23 @@ class Transaction(Base):
     input = Column(Boolean)
     amount = Column(Integer)
     transaction_time = Column(DateTime)
+    last_amount = Column(Integer)
     items_id = Column(Integer, ForeignKey("items.id"))
+    user_id = Column(Integer, ForeignKey("users.id"))
 
     item = relationship("Item", back_populates="transactions")
+    user = relationship("User", back_populates="transactions")
+
+
+class Alert(Base):
+    __tablename__ = "alerts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    seen = Column(Boolean)  # NOT DONE
+    alert_time = Column(DateTime)
+    item_id = Column(Integer, ForeignKey("items.id"))
+
+    item = relationship("Item", back_populates="alerts")
 
 
 class Item(Base):
@@ -46,10 +61,12 @@ class Item(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(999))
     count = Column(Integer)
+    limit = Column(Integer)  # NOT DONE
     quantity_id = Column(Integer, ForeignKey("quantities.id"))
     categorie_id = Column(Integer, ForeignKey("categories.id"))
 
     transactions = relationship("Transaction", back_populates="item")
+    alerts = relationship("Alert", back_populates="item")
 
     quantity = relationship("Quantity", back_populates="items")
     categorie = relationship("Categorie", back_populates="items")

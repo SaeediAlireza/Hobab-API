@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -22,7 +23,7 @@ def create_quantity(
 
 @router.get("/all", response_model=List[schemas.QuantityInfoResponse])
 def get_all_quantities(db: Session = Depends(util.get_db)):
-    quantities = db.query(model.Quantity).all()
+    quantities = db.query(model.Quantity).order_by(desc(model.Quantity.id)).all()
     if not quantities:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"

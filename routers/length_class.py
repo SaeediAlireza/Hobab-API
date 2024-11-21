@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -24,7 +25,9 @@ def create_length_class(
 
 @router.get("/all", response_model=List[schemas.LengthInfoResponse])
 def get_all_length_classes(db: Session = Depends(util.get_db)):
-    length_classes = db.query(model.LengthClass).all()
+    length_classes = (
+        db.query(model.LengthClass).order_by(desc(model.LengthClass.id)).all()
+    )
     if not length_classes:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

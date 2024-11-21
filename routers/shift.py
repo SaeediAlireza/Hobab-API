@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -26,14 +27,14 @@ def create_shift(
 
 
 @router.get("/all", response_model=List[schemas.ShiftInfoResponse])
-def get_all_quantities(db: Session = Depends(util.get_db)):
-    quantities = db.query(model.Shift).all()
-    if not quantities:
+def get_all_shifts(db: Session = Depends(util.get_db)):
+    shifts = db.query(model.Shift).order_by(desc(model.Shift.id)).all()
+    if not shifts:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any shifts"
         )
     else:
-        return quantities
+        return shifts
 
 
 @router.get("/{id}", response_model=schemas.ShiftInfoResponse)
@@ -42,7 +43,22 @@ def get_shift_by_id(id: int, db: Session = Depends(util.get_db)):
     if not shift:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"there is't any shift with the id {id}",
+            detail=f"there isn't any shift with the id {id}",
         )
     else:
         return shift
+
+
+@router.get("/delete/{Shift_id}")
+def delete_shift_by_id(
+    Shift_id: int,
+    response: Response,
+    db: Session = Depends(util.get_db),
+):
+    Shift = db.query(model.Shift).filter(model.Shift.id == Shift_id).first()
+    if not Shift:
+        response.status_code = status.HTTP_404_NOT_FOUND
+    db.delete(Shift)
+    db.commit()
+
+    return {"detail": "Item deleted successfully"}

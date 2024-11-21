@@ -3,7 +3,8 @@ from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import Session
-from sqlalchemy import update
+from sqlalchemy import update, desc
+from datetime import time
 
 from util import util
 
@@ -25,7 +26,10 @@ def create_user(
         end_work_time=request.end_work_time,
     )
     user_exist = (
-        db.query(model.User).filter(model.User.user_name == new_user.user_name).first()
+        db.query(model.User)
+        .filter(model.User.user_name == new_user.user_name)
+        .order_by(desc(model.User.id))
+        .first()
     )
 
     if user_exist:
@@ -55,6 +59,29 @@ def get_all_users(
     db: Session = Depends(util.get_db),
 ):
     users = db.query(model.User).all()
+    if not users:
+        response.status_code = status.HTTP_404_NOT_FOUND
+    return users
+
+
+@router.get(
+    "/all-timeline-users/{start_time}/{end_time}",
+    response_model=List[schemas.UserInfoResponse],
+)
+def get_all_active_users_in_time_zone(
+    start_time: time,
+    end_time: time,
+    response: Response,
+    db: Session = Depends(util.get_db),
+):
+    users = (
+        db.query(model.User)
+        .filter(
+            (model.User.end_work_time > start_time)
+            | (model.User.start_work_time < end_time)
+        )
+        .all()
+    )
     if not users:
         response.status_code = status.HTTP_404_NOT_FOUND
     return users

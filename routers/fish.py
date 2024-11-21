@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -25,13 +26,33 @@ def create_fish(
 
 @router.get("/all", response_model=List[schemas.FishInfoResponse])
 def get_all_quantities(db: Session = Depends(util.get_db)):
-    quantities = db.query(model.Fish).all()
+    quantities = db.query(model.Fish).order_by(desc(model.Fish.id)).all()
     if not quantities:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"
         )
     else:
         return quantities
+
+
+@router.get(
+    "/all-fish-location-pooltype/", response_model=schemas.PoolFishLocationInfoResponse
+)
+def get_all_quantities(db: Session = Depends(util.get_db)):
+    fishes = db.query(model.Fish).order_by(desc(model.Fish.id)).all()
+    locations = db.query(model.Location).order_by(desc(model.Location.id)).all()
+    pool_types = db.query(model.PoolType).order_by(desc(model.PoolType.id)).all()
+    response = schemas.PoolFishLocationInfoResponse(
+        pool_types=pool_types,
+        locations=locations,
+        fishes=fishes,
+    )
+    if not response:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="there is'nt any quantities"
+        )
+    else:
+        return response
 
 
 @router.get("/{id}", response_model=schemas.FishInfoResponse)

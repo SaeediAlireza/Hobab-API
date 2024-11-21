@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from model import model, schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import update, desc
 
 from util import util
 
@@ -25,7 +26,7 @@ def create_pool_type(
 
 @router.get("/all", response_model=List[schemas.PoolTypeInfoResponse])
 def get_all_pool_typees(db: Session = Depends(util.get_db)):
-    pool_typees = db.query(model.PoolType).all()
+    pool_typees = db.query(model.PoolType).order_by(desc(model.PoolType.id)).all()
     if not pool_typees:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

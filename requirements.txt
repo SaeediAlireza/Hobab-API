@@ -6,3 +6,9 @@ bcrypt
 PyJWT
 python-jose
 pymysql
+python-multipart
+pydantic
+pandas
+numpy
+joblib
+sklearn

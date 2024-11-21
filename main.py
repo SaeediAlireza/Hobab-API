@@ -4,6 +4,7 @@ from model import database, model
 import ssl
 
 import routers.ages
+import routers.alert
 import routers.authentication
 import routers.category
 import routers.caviar
@@ -37,9 +38,11 @@ app.add_middleware(
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.load_cert_chain("./cert.pem", keyfile="./key.pem")
 
-
+# test
 model.Base.metadata.create_all(database.engine)
 app.include_router(routers.ages.router)
+app.include_router(routers.alert.router)
+
 app.include_router(routers.authentication.router)
 app.include_router(routers.caviar_breed.router)
 app.include_router(routers.caviar.router)

@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 from datetime import datetime, time
 
@@ -6,6 +7,8 @@ from datetime import datetime, time
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user_name: str
+    name: str
 
 
 class TokenData(BaseModel):
@@ -77,23 +80,56 @@ class QuantityInfoResponse(BaseModel):
         from_attributes = True
 
 
-# category
-class CategoryAddRequest(BaseModel):
-    name: str
-
-
 # sub category
 class SubCategoryAddRequest(BaseModel):
     dom_categorie_id: int
     sub_categorie_id: int
 
 
+class CategoryInfoBase(BaseModel):
+    id: int
+    name: str
+
+
+class SubCategoryInfoResponse(BaseModel):
+    # dom: CategoryInfoBase
+    sub: CategoryInfoBase
+
+
+# category
+class CategoryAddRequest(BaseModel):
+    name: str
+
+
+class CategoryInfoResponse(BaseModel):
+    id: int
+    name: str
+    dom_categorie: List[SubCategoryInfoResponse]
+
+
 # item
 class ItemAddRequest(BaseModel):
     name: str
     count: int
+    limit: int
     quantity_id: int
-    category_id: int
+    categorie_id: int
+
+
+class ItemInfoResponse(BaseModel):
+    id: int
+    name: str
+    count: int
+    limit: int
+    quantity_id: int
+    quantity: QuantityInfoResponse
+    categorie: CategoryInfoBase
+
+
+# alert
+class AlertInfoResponse(BaseModel):
+    id: int
+    item: ItemInfoResponse
 
 
 # transaction
@@ -101,7 +137,8 @@ class TransactionAddRequest(BaseModel):
     input: bool
     amount: int
     transaction_time: datetime
-    item_id: int
+    items_id: int
+    user_id: int
 
 
 class TransactionInfoResponse(BaseModel):
@@ -109,10 +146,24 @@ class TransactionInfoResponse(BaseModel):
     input: bool
     amount: int
     transaction_time: datetime
-    item_id: int
+    last_amount: int
+    items_id: int
+    user_id: int
+    user: UserInfoResponse
+    item: ItemInfoResponse
 
     class Config:
         from_attributes = True
+
+
+class TransactionItemResponse(BaseModel):
+    id: int
+    name: str
+    count: int
+    quantity_id: int
+    quantity: QuantityInfoResponse
+    categorie_id: int
+    transactions: List[TransactionInfoResponse]
 
 
 # ages
@@ -139,7 +190,7 @@ class LengthAddRequest(BaseModel):
 class LengthInfoResponse(BaseModel):
     id: int
     start_length: int
-    end_lentgth: int
+    end_length: int
 
     class Config:
         from_attributes = True
@@ -269,28 +320,33 @@ class CaviarInfoResponse(BaseModel):
     weight: int
     length: int
     time_of_birth: datetime
-    weight_class_id: WeightInfoResponse
-    length_class_id: LengthInfoResponse
-    ages_id: AgesInfoResponse
-    pool_id: PoolInfoResponse
-    caviar_breed_id: CaviarBreedInfoResponse
+    weight_class_id: int
+    length_class_id: int
+    ages_id: int
+    pool_id: int
+    caviar_breed_id: int
 
     class Config:
         from_attributes = True
 
 
+class CaviarPredictionRequest(BaseModel):
+    age: float
+    length: float
+
+
 # shift
 class ShiftAddRequest(BaseModel):
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     description: str
     user_id: int
 
 
 class ShiftInfoResponse(BaseModel):
     id: int
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     description: str
     user: UserInfoResponse
 
@@ -311,7 +367,19 @@ class TaskInfoResponse(BaseModel):
     description: str
     shift: ShiftInfoResponse
     pool: PoolInfoResponse
-    Location: LocationInfoResponse
+    location: LocationInfoResponse
+
+    class Config:
+        from_attributes = True
+
+
+# special
+
+
+class PoolFishLocationInfoResponse(BaseModel):
+    fishes: List[FishInfoResponse]
+    locations: List[LocationInfoResponse]
+    pool_types: List[PoolTypeInfoResponse]
 
     class Config:
         from_attributes = True
