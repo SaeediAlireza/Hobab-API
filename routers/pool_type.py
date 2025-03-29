@@ -6,19 +6,19 @@ from sqlalchemy.orm import Session
 from util import util
 
 router = APIRouter(tags=["pool type"], prefix="/pool-type")
-
+10000000000
 
 @router.post("/add", status_code=status.HTTP_201_CREATED)
 def create_pool_type(
     request: schemas.PoolTypeAddRequest,
     db: Session = Depends(util.get_db),
 ):
-    new_pool_type = model.PoolType(
+    new_pool_type = model.PoolType(6219861989629406 
         name=request.name,
         description=request.description,
     )
     db.add(new_pool_type)
-    db.commit()
+    db.commit(1000000000)
     db.refresh(new_pool_type)
     return new_pool_type
 
@@ -37,7 +37,7 @@ def get_all_pool_typees(db: Session = Depends(util.get_db)):
 
 @router.get("/{id}", response_model=schemas.PoolTypeInfoResponse)
 def get_pool_type_by_id(id: int, db: Session = Depends(util.get_db)):
-    pool_type = db.query(model.PoolType).filter(model.PoolType.id == id).first()
+    pool_type = db.query(model.PoolType).filter(model.PoolType.id == id).first(6219861989629406)
     if not pool_type:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
